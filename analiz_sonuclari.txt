@@ -1,0 +1,545 @@
+
+================================================================================
+  1. VERİ OKUMA VE HAZIRLAMA
+================================================================================
+
+Veri Seti Bilgileri:
+  Dönem: 2015-04 - 2023-07
+  Gözlem Sayısı: 100
+  Değişken Sayısı: 5
+
+Değişkenler:
+  Y  (Bağımlı)  : TÜFE (Tüketici Fiyat Endeksi)
+  X1 (Bağımsız) : USD Dolar Kuru
+  X2 (Bağımsız) : Sanayi Üretim Endeksi (2015=100)
+  X3 (Bağımsız) : M3 Para Piyasaları (Milyar TL)
+  X4 (Bağımsız) : Tüketici Güven Endeksi
+
+  Eksik veri bulunmamaktadır.
+
+================================================================================
+  TANIMLAYICI İSTATİSTİKLER
+================================================================================
+
+Değişken               Ort.         Std.Sap.     Min          Max          CV(%)      Çarpıklık 
+------------------------------------------------------------------------------------------
+TÜFE                   22.5349      21.3833      6.5700       85.5100      94.89      1.7960    
+USD Dolar              7.6536       5.6122       2.6485       26.4465      73.33      1.4157    
+Sanayi Üretim End.     119.5166     18.2117      78.2162      165.5610     15.24      0.3540    
+M3 (Milyar TL)         3.3325       2.5555       1.1462       11.7730      76.68      1.5435    
+Tüketici Güven End.    83.5255      7.3708       63.4100      95.1662      8.82       -0.3677   
+
+================================================================================
+  KORELASYON MATRİSİ
+================================================================================
+
+                  tufe     usd  sanayi      m3  tuketici_guven
+tufe            1.0000  0.8695  0.6553  0.8191         -0.6680
+usd             0.8695  1.0000  0.7285  0.9919         -0.6108
+sanayi          0.6553  0.7285  1.0000  0.7153         -0.5608
+m3              0.8191  0.9919  0.7153  1.0000         -0.5454
+tuketici_guven -0.6680 -0.6108 -0.5608 -0.5454          1.0000
+
+================================================================================
+  2. DEĞİŞKENLERİN GRAFİKLERİ
+================================================================================
+  ✓ TÜFE (Tüketici Fiyat Endeksi) grafiği kaydedildi.
+  ✓ USD/TRY Dolar Kuru grafiği kaydedildi.
+  ✓ Sanayi Üretim Endeksi (2015=100) grafiği kaydedildi.
+  ✓ M3 Para Piyasaları (Milyar TL) grafiği kaydedildi.
+  ✓ Tüketici Güven Endeksi grafiği kaydedildi.
+  ✓ Tüm değişkenler grafiği kaydedildi.
+  ✓ Korelasyon matrisi grafiği kaydedildi.
+
+================================================================================
+  3. FONKSİYONEL FORM KARŞILAŞTIRMASI
+================================================================================
+
+--- Model 1: Lin-Lin ---
+  Y = β₀ + β₁·USD + β₂·Sanayi + β₃·M3 + β₄·TüketiciGüven + ε
+  R² = 0.873893
+  Düzeltilmiş R² = 0.868583
+  AIC = 698.2429
+  BIC = 711.2687
+  F-ist = 164.5817, p = 0.000000
+
+--- Model 2: Log-Log ---
+  lnY = β₀ + β₁·lnUSD + β₂·lnSanayi + β₃·lnM3 + β₄·lnTüketiciGüven + ε
+  R² = 0.892586
+  Düzeltilmiş R² = 0.888064
+  AIC = 6.5122
+  BIC = 19.5380
+  F-ist = 197.3577, p = 0.000000
+
+--- Model 3: Log-Lin (Semi-log) ---
+  lnY = β₀ + β₁·USD + β₂·Sanayi + β₃·M3 + β₄·TüketiciGüven + ε
+  R² = 0.903611
+  Düzeltilmiş R² = 0.899553
+  AIC = -4.3175
+  BIC = 8.7083
+  F-ist = 222.6476, p = 0.000000
+
+--- Model 4: Lin-Log ---
+  Y = β₀ + β₁·lnUSD + β₂·lnSanayi + β₃·lnM3 + β₄·lnTüketiciGüven + ε
+  R² = 0.733593
+  Düzeltilmiş R² = 0.722376
+  AIC = 773.0319
+  BIC = 786.0578
+  F-ist = 65.3994, p = 0.000000
+
+--- Fonksiyonel Form Karşılaştırma Tablosu ---
+Model           R²           Adj.R²       AIC            BIC            F-ist       
+---------------------------------------------------------------------------
+Lin-Lin         0.873893     0.868583     698.2429       711.2687       164.5817    
+Log-Log         0.892586     0.888064     6.5122         19.5380        197.3577    
+Log-Lin         0.903611     0.899553     -4.3175        8.7083         222.6476    
+Lin-Log         0.733593     0.722376     773.0319       786.0578       65.3994     
+
+  Not: R² karşılaştırması yalnızca aynı bağımlı değişkene sahip modeller arasında geçerlidir.
+  Lin-Lin vs Lin-Log (Bağımlı: Y) ve Log-Log vs Log-Lin (Bağımlı: lnY) karşılaştırılabilir.
+
+  Y bağımlı modeller arasında en iyi: Lin-Lin (Adj.R²=0.868583)
+  lnY bağımlı modeller arasında en iyi: Log-Lin (Adj.R²=0.899553)
+
+  ✓ Fonksiyonel form karşılaştırma grafiği kaydedildi.
+
+================================================================================
+  4. ANA MODEL - LIN-LIN REGRESYON SONUÇLARI
+================================================================================
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                   tufe   R-squared:                       0.874
+Model:                            OLS   Adj. R-squared:                  0.869
+Method:                 Least Squares   F-statistic:                     164.6
+Date:                Fri, 29 May 2026   Prob (F-statistic):           8.20e-42
+Time:                        12:40:39   Log-Likelihood:                -344.12
+No. Observations:                 100   AIC:                             698.2
+Df Residuals:                      95   BIC:                             711.3
+Df Model:                           4                                         
+Covariance Type:            nonrobust                                         
+==================================================================================
+                     coef    std err          t      P>|t|      [0.025      0.975]
+----------------------------------------------------------------------------------
+const            -25.0326     18.037     -1.388      0.168     -60.841      10.775
+usd               14.4404      1.444     10.000      0.000      11.574      17.307
+sanayi             0.0203      0.064      0.317      0.752      -0.107       0.147
+m3               -24.4048      2.999     -8.137      0.000     -30.359     -18.451
+tuketici_guven     0.1910      0.170      1.121      0.265      -0.147       0.529
+==============================================================================
+Omnibus:                       50.224   Durbin-Watson:                   0.448
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              295.303
+Skew:                          -1.452   Prob(JB):                     7.51e-65
+Kurtosis:                      10.902   Cond. No.                     3.43e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 3.43e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+================================================================================
+  5. t TESTİ VE F TESTİ
+================================================================================
+
+--- t Testi (Bireysel Katsayı Anlamlılığı) ---
+  Anlamlılık Düzeyi: α = 0.05
+
+Değişken                     Katsayı        Std.Hata     t-ist.     p-değeri     Karar     
+------------------------------------------------------------------------------------------
+  Sabit Terim (β₀)           -25.032635     18.037055    -1.3878    0.168431     REDDEDİLEMEZ
+  USD Dolar (β₁)             14.440450      1.444061     9.9999     0.000000     RED
+    H₀: β = 0 (usd TÜFE üzerinde etkisizdir)
+    H₁: β ≠ 0 (usd TÜFE üzerinde etkilidir)
+    → p=0.000000 < α=0.05 olduğundan H₀ REDDEDİLİR.
+    → USD Dolar (β₁) %95 güven düzeyinde istatistiksel olarak ANLAMLIDIR.
+
+  Sanayi Üretim End. (β₂)    0.020275       0.064030     0.3166     0.752208     REDDEDİLEMEZ
+    H₀: β = 0 (sanayi TÜFE üzerinde etkisizdir)
+    H₁: β ≠ 0 (sanayi TÜFE üzerinde etkilidir)
+    → p=0.752208 > α=0.05 olduğundan H₀ REDDEDİLEMEZ.
+    → Sanayi Üretim End. (β₂) %95 güven düzeyinde istatistiksel olarak ANLAMSIZDIR.
+
+  M3 Para Piy. (β₃)          -24.404752     2.999116     -8.1373    0.000000     RED
+    H₀: β = 0 (m3 TÜFE üzerinde etkisizdir)
+    H₁: β ≠ 0 (m3 TÜFE üzerinde etkilidir)
+    → p=0.000000 < α=0.05 olduğundan H₀ REDDEDİLİR.
+    → M3 Para Piy. (β₃) %95 güven düzeyinde istatistiksel olarak ANLAMLIDIR.
+
+  Tüketici Güven End. (β₄)   0.190986       0.170442     1.1205     0.265312     REDDEDİLEMEZ
+    H₀: β = 0 (tuketici_guven TÜFE üzerinde etkisizdir)
+    H₁: β ≠ 0 (tuketici_guven TÜFE üzerinde etkilidir)
+    → p=0.265312 > α=0.05 olduğundan H₀ REDDEDİLEMEZ.
+    → Tüketici Güven End. (β₄) %95 güven düzeyinde istatistiksel olarak ANLAMSIZDIR.
+
+
+--- F Testi (Modelin Genel Anlamlılığı) ---
+  H₀: β₁ = β₂ = β₃ = β₄ = 0 (Model anlamsızdır, hiçbir bağımsız değişken etkili değildir)
+  H₁: En az bir βᵢ ≠ 0 (Model anlamlıdır)
+
+  F-istatistiği = 164.5817
+  p-değeri = 0.0000000000
+  Serbestlik Dereceleri: df1=4, df2=95
+  F-kritik (α=0.05) = 2.4675
+
+  → F-ist (164.5817) > F-kritik (2.4675) olduğundan H₀ REDDEDİLİR.
+  → Model %95 güven düzeyinde BÜTÜN OLARAK ANLAMLIDIR.
+
+================================================================================
+  6. MacKinnon-White-Davidson (MWD) TESTİ
+================================================================================
+
+  Amaç: Doğrusal (Lin-Lin) ve logaritmik (Log-Log) fonksiyonel formlar arasında seçim yapmak.
+
+--- MWD Testi - Adım 1: Doğrusal Model Testi ---
+  H₀: Doğrusal (Lin-Lin) model doğru fonksiyonel formdur
+  H₁: Logaritmik (Log-Log) model doğru fonksiyonel formdur
+
+  Z1 katsayısı = -0.578496
+  Z1 t-istatistiği = -2.3882
+  Z1 p-değeri = 0.018932
+
+  → Z1 anlamlıdır (p=0.018932 < 0.05). H₀ REDDEDİLİR.
+  → Doğrusal model reddedilir, Logaritmik model tercih edilmelidir.
+
+--- MWD Testi - Adım 2: Logaritmik Model Testi ---
+  H₀: Logaritmik (Log-Log) model doğru fonksiyonel formdur
+  H₁: Doğrusal (Lin-Lin) model doğru fonksiyonel formdur
+
+  Z2 katsayısı = -2.071815
+  Z2 t-istatistiği = -3.0738
+  Z2 p-değeri = 0.002766
+
+  → Z2 anlamlıdır (p=0.002766 < 0.05). H₀ REDDEDİLİR.
+  → Logaritmik model reddedilir, Doğrusal model tercih edilmelidir.
+
+--- MWD Testi Sonuç ---
+  Test 1 (Doğrusal model H₀): Doğrusal model REDDEDİLDİ
+  Test 2 (Logaritmik model H₀): Logaritmik model REDDEDİLDİ
+
+================================================================================
+  7. ÇOKLU DOĞRUSAL BAĞLANTI ANALİZİ (MULTICOLLINEARITY)
+================================================================================
+
+--- VIF (Variance Inflation Factor) Analizi ---
+  Kural: VIF > 10 → ciddi çoklu doğrusal bağlantı
+         VIF > 5  → orta düzeyde çoklu doğrusal bağlantı
+         VIF < 5  → sorun yok
+
+Değişken                  VIF          Durum               
+---------------------------------------------------------
+  USD Dolar (β₁)          108.2088     ⚠ CİDDİ SORUN
+  Sanayi Üretim End. (β₂) 2.2403       ✓ SORUN YOK
+  M3 Para Piy. (β₃)       96.7734      ⚠ CİDDİ SORUN
+  Tüketici Güven End. (β₄) 2.6003       ✓ SORUN YOK
+
+--- Condition Number ---
+  Condition Number = 3430.2746
+  → Condition Number > 30: Çoklu doğrusal bağlantı sorunu mevcut olabilir.
+
+--- Bağımsız Değişkenler Arası Korelasyon ---
+
+                   usd  sanayi      m3  tuketici_guven
+usd             1.0000  0.7285  0.9919         -0.6108
+sanayi          0.7285  1.0000  0.7153         -0.5608
+m3              0.9919  0.7153  1.0000         -0.5454
+tuketici_guven -0.6108 -0.5608 -0.5454          1.0000
+
+  ⚠ Yüksek korelasyon: usd - m3: r = 0.9919
+
+--- Çoklu Doğrusal Bağlantı Yorum ---
+  Sonuç: Ciddi çoklu doğrusal bağlantı sorunu tespit edilmiştir.
+  Çözüm Önerileri:
+    1. Yüksek VIF'e sahip değişkenlerden birinin modelden çıkarılması
+    2. Ridge regresyon gibi düzenlileştirme yöntemlerinin kullanılması
+    3. Temel bileşenler analizi (PCA) uygulanması
+
+================================================================================
+  8. DURAĞANLIK - AUGMENTED DICKEY-FULLER (ADF) TESTİ
+================================================================================
+
+  H₀: Seri birim kök içerir (durağan DEĞİLDİR)
+  H₁: Seri birim kök içermez (DURAĞANDIR)
+  Anlamlılık Düzeyi: α = 0.05
+
+Değişken                  ADF İst.     p-değeri     Gecikme    Karar               
+--------------------------------------------------------------------------------
+  TÜFE                    2.8078       1.000000     12         DURAĞAN DEĞİL
+  USD Dolar               3.6584       1.000000     4          DURAĞAN DEĞİL
+  Sanayi Üretim End.      -0.0925      0.950184     12         DURAĞAN DEĞİL
+  M3 (Milyar TL)          9.1182       1.000000     0          DURAĞAN DEĞİL
+  Tüketici Güven End.     -2.0906      0.248297     0          DURAĞAN DEĞİL
+
+--- Detaylı ADF Testi Sonuçları ---
+
+  TÜFE:
+    ADF İstatistiği: 2.8078
+    p-değeri: 1.000000
+    Kritik Değerler: 1%: -3.5079, 5%: -2.8954, 10%: -2.5848
+    → p=1.000000 > α=0.05, H₀ REDDEDİLEMEZ. Seri DURAĞAN DEĞİLDİR.
+
+  USD Dolar:
+    ADF İstatistiği: 3.6584
+    p-değeri: 1.000000
+    Kritik Değerler: 1%: -3.5011, 5%: -2.8925, 10%: -2.5833
+    → p=1.000000 > α=0.05, H₀ REDDEDİLEMEZ. Seri DURAĞAN DEĞİLDİR.
+
+  Sanayi Üretim End.:
+    ADF İstatistiği: -0.0925
+    p-değeri: 0.950184
+    Kritik Değerler: 1%: -3.5079, 5%: -2.8954, 10%: -2.5848
+    → p=0.950184 > α=0.05, H₀ REDDEDİLEMEZ. Seri DURAĞAN DEĞİLDİR.
+
+  M3 (Milyar TL):
+    ADF İstatistiği: 9.1182
+    p-değeri: 1.000000
+    Kritik Değerler: 1%: -3.4982, 5%: -2.8912, 10%: -2.5826
+    → p=1.000000 > α=0.05, H₀ REDDEDİLEMEZ. Seri DURAĞAN DEĞİLDİR.
+
+  Tüketici Güven End.:
+    ADF İstatistiği: -2.0906
+    p-değeri: 0.248297
+    Kritik Değerler: 1%: -3.4982, 5%: -2.8912, 10%: -2.5826
+    → p=0.248297 > α=0.05, H₀ REDDEDİLEMEZ. Seri DURAĞAN DEĞİLDİR.
+
+--- Birinci Fark ile Durağanlık Kontrolü ---
+  Durağan olmayan seriler için birinci fark (Δ) alınıyor...
+
+Değişken (Δ)              ADF İst.     p-değeri     Karar               
+----------------------------------------------------------------------
+  ΔTÜFE                   -2.6178      0.089373     DURAĞAN DEĞİL
+  ΔUSD Dolar              -3.6680      0.004587     DURAĞAN
+  ΔSanayi Üretim End.     -4.1074      0.000942     DURAĞAN
+  ΔM3 (Milyar TL)         2.5415       0.999062     DURAĞAN DEĞİL
+  ΔTüketici Güven End.    -9.7496      0.000000     DURAĞAN
+
+================================================================================
+  9. WALD TESTİ
+================================================================================
+
+  Amaç: Bağımsız değişkenlerin alt gruplarının birlikte anlamlılığını test etmek.
+
+--- Wald Testi 1: Parasal Değişkenler ---
+  H₀: β₁ (USD) = β₃ (M3) = 0 (Parasal değişkenler birlikte anlamsızdır)
+  H₁: En az bir βᵢ ≠ 0 (En az biri anlamlıdır)
+
+  Wald F-istatistiği = 117.7985
+  p-değeri = 0.000000
+  → p=0.000000 < α=0.05, H₀ REDDEDİLİR.
+  → Parasal değişkenler (USD, M3) birlikte İSTATİSTİKSEL OLARAK ANLAMLIDIR.
+
+--- Wald Testi 2: Reel Ekonomi Değişkenleri ---
+  H₀: β₂ (Sanayi) = β₄ (TüketiciGüven) = 0 (Reel ekonomi değişkenleri birlikte anlamsızdır)
+  H₁: En az bir βᵢ ≠ 0
+
+  Wald F-istatistiği = 0.6318
+  p-değeri = 0.533875
+  → p=0.533875 > α=0.05, H₀ REDDEDİLEMEZ.
+  → Reel ekonomi değişkenleri birlikte anlamsızdır.
+
+--- Wald Testi 3: Tüm Bağımsız Değişkenler ---
+  H₀: β₁ = β₂ = β₃ = β₄ = 0 (Tüm bağımsız değişkenler birlikte anlamsızdır)
+  H₁: En az bir βᵢ ≠ 0
+
+  Wald F-istatistiği = 164.5817
+  p-değeri = 0.0000000000
+  → p < α=0.05, H₀ REDDEDİLİR.
+  → Tüm bağımsız değişkenler birlikte İSTATİSTİKSEL OLARAK ANLAMLIDIR.
+
+================================================================================
+  10. CHOW TESTİ (YAPISAL KIRILMA)
+================================================================================
+
+  Kırılma Noktası: 2018-08 (Ağustos 2018 - Türk Lirası Krizi)
+
+  H₀: İki dönem arasında yapısal kırılma YOKTUR (parametreler stabildir)
+  H₁: İki dönem arasında yapısal kırılma VARDIR (parametreler değişmiştir)
+
+  Dönem 1: 2015-04 - 2018-07 (n₁=40)
+  Dönem 2: 2018-08 - 2023-07 (n₂=60)
+
+  RSS (Tam Dönem) = 5708.5587
+  RSS (Dönem 1) = 41.6267
+  RSS (Dönem 2) = 4625.7330
+
+  Chow F-istatistiği = 4.0155
+  F-kritik (α=0.05, df1=5, df2=90) = 2.3157
+  p-değeri = 0.002465
+
+  → Chow F (4.0155) > F-kritik (2.3157), H₀ REDDEDİLİR.
+  → 2018-08 tarihinde YAPISAL KIRILMA TESPİT EDİLMİŞTİR.
+  → 2018 TL krizi, enflasyon modelinin parametrelerini önemli ölçüde değiştirmiştir.
+
+--- Chow Testi - COVID-19 Kırılması ---
+  Kırılma Noktası: 2020-03 (Mart 2020 - COVID-19 Pandemisi)
+  Dönem 1: 2015-04 - 2020-02 (n₁=59)
+  Dönem 2: 2020-03 - 2023-07 (n₂=41)
+
+  Chow F-istatistiği = 4.5762
+  p-değeri = 0.000915
+  → Chow F (4.5762) > F-kritik (2.3157), H₀ REDDEDİLİR.
+  → COVID-19 döneminde YAPISAL KIRILMA TESPİT EDİLMİŞTİR.
+
+================================================================================
+  11. PARK TESTİ (DEĞİŞEN VARYANS / HETEROSCEDASTICITY)
+================================================================================
+
+  H₀: Sabit varyans vardır (Homoscedasticity)
+  H₁: Değişen varyans vardır (Heteroscedasticity)
+
+  Yöntem: ln(eᵢ²) = α + β·ln(Xⱼ) + vᵢ regresyonunda β'nın anlamlılığı test edilir.
+
+Değişken                  β katsayısı    t-ist.     p-değeri     Karar               
+--------------------------------------------------------------------------------
+  USD Dolar (β₁)          1.815500       6.6590     0.000000     DEĞİŞEN VARYANS
+  Sanayi Üretim End. (β₂) 4.842592       3.7510     0.000298     DEĞİŞEN VARYANS
+  M3 Para Piy. (β₃)       1.772852       6.6337     0.000000     DEĞİŞEN VARYANS
+  Tüketici Güven End. (β₄) -9.758599      -4.6430    0.000011     DEĞİŞEN VARYANS
+
+--- Park Testi Yorum ---
+  4 değişken için değişen varyans (heteroscedasticity) tespit edilmiştir.
+    → USD Dolar (β₁): β=1.8155, p=0.000000 < 0.05
+    → Sanayi Üretim End. (β₂): β=4.8426, p=0.000298 < 0.05
+    → M3 Para Piy. (β₃): β=1.7729, p=0.000000 < 0.05
+    → Tüketici Güven End. (β₄): β=-9.7586, p=0.000011 < 0.05
+  Bu durum OLS tahminlerinin etkin olmadığına işaret etmektedir.
+  Çözüm: Ağırlıklı En Küçük Kareler (WLS) veya Robust standart hatalar kullanılabilir.
+
+================================================================================
+  12. GOLDFELD-QUANDT TESTİ (DEĞİŞEN VARYANS)
+================================================================================
+
+  H₀: σ₁² = σ₂² (Varyanslar eşittir - Sabit varyans / Homoscedasticity)
+  H₁: σ₁² ≠ σ₂² (Varyanslar eşit değildir - Değişen varyans / Heteroscedasticity)
+
+  Yöntem: Veri, şüpheli değişkene göre sıralanır, ortadaki gözlemler çıkarılır,
+          iki alt grubun kalıntı varyansları karşılaştırılır.
+
+Sıralama Değişkeni        F-ist.       p-değeri     Karar                    
+---------------------------------------------------------------------------
+  USD Dolar (β₁)          30.2989      0.000000     DEĞİŞEN VARYANS
+  Sanayi Üretim End. (β₂) 44.0721      0.000000     DEĞİŞEN VARYANS
+  M3 Para Piy. (β₃)       52.3889      0.000000     DEĞİŞEN VARYANS
+  Tüketici Güven End. (β₄) 0.0530       0.000000     DEĞİŞEN VARYANS
+
+--- Goldfeld-Quandt Testi Yorum ---
+  4 değişken için değişen varyans tespit edilmiştir.
+    → USD Dolar (β₁): F=30.2989, p=0.000000
+    → Sanayi Üretim End. (β₂): F=44.0721, p=0.000000
+    → M3 Para Piy. (β₃): F=52.3889, p=0.000000
+    → Tüketici Güven End. (β₄): F=0.0530, p=0.000000
+
+================================================================================
+  13. WHITE TESTİ (DEĞİŞEN VARYANS)
+================================================================================
+
+  H₀: Sabit varyans vardır (Homoscedasticity)
+  H₁: Değişen varyans vardır (Heteroscedasticity)
+
+  Yöntem: eᵢ² = α₀ + α₁X₁ + α₂X₂ + ... + α·X₁² + α·X₂² + ... + α·X₁X₂ + ...
+
+  White LM İstatistiği = 81.7805
+  LM p-değeri = 0.000000
+  White F İstatistiği = 27.2524
+  F p-değeri = 0.000000
+
+  → LM p-değeri (0.000000) < α=0.05, H₀ REDDEDİLİR.
+  → White testine göre DEĞİŞEN VARYANS sorunu VARDIR.
+  → OLS tahminleri hala tutarsız değildir ancak ETKİN DEĞİLDİR.
+  → Standart hatalar güvenilir değildir, t ve F testleri yanıltıcı olabilir.
+  → Çözüm: HAC (Heteroscedasticity-Autocorrelation Consistent) standart hatalar kullanılabilir.
+
+================================================================================
+  14. DURBIN-WATSON TESTİ VE DURBIN-WATSON h TESTİ
+================================================================================
+
+--- Durbin-Watson (DW) Testi ---
+  H₀: Birinci dereceden otokorelasyon YOKTUR (ρ = 0)
+  H₁: Birinci dereceden otokorelasyon VARDIR (ρ ≠ 0)
+
+  DW İstatistiği = 0.4483
+  n = 100, k = 4
+
+  Kritik Değerler (α=0.05, n=100, k=4):
+    dL = 1.592
+    dU = 1.758
+    4-dU = 2.242
+    4-dL = 2.408
+
+  Karar Kuralları:
+    0 < DW < dL (1.592): Pozitif otokorelasyon VAR
+    dL < DW < dU (1.592-1.758): Kararsız bölge
+    dU < DW < 4-dU (1.758-2.242): Otokorelasyon YOK
+    4-dU < DW < 4-dL (2.242-2.408): Kararsız bölge
+    4-dL < DW < 4 (2.408-4): Negatif otokorelasyon VAR
+
+  → DW = 0.4483 < dL = 1.592
+  → POZİTİF OTOKORELASYON VARDIR
+  → H₀ REDDEDİLİR. Modelde pozitif otokorelasyon sorunu mevcuttur.
+
+
+--- Durbin h Testi ---
+  Amaç: Gecikmeli bağımlı değişken içeren modellerde otokorelasyonun test edilmesi
+  H₀: Otokorelasyon YOKTUR
+  H₁: Otokorelasyon VARDIR
+
+  Gecikmeli Model Tahmin Sonuçları:
+    ρ̂ = 1 - DW/2 = 1 - 1.1961/2 = 0.4020
+    n = 99
+    Var(β̂_lag) = 0.00068917
+    n · Var(β̂_lag) = 0.068228
+    1 - n · Var(β̂_lag) = 0.931772
+
+  h istatistiği = 4.1433
+  |h| = 4.1433
+  Kritik Değer (Z₀.₀₂₅) = 1.96
+
+  → |h| = 4.1433 > 1.96, H₀ REDDEDİLİR.
+  → Gecikmeli modelde OTOKORELASYON VARDIR.
+
+  ✓ Otokorelasyon grafikleri kaydedildi.
+
+================================================================================
+  15. DİAGNOSTİK GRAFİKLER
+================================================================================
+  ✓ Diagnostik grafikleri kaydedildi.
+  ✓ Değişen varyans grafikleri kaydedildi.
+
+================================================================================
+  16. GENEL SONUÇLAR VE DEĞERLENDİRME
+================================================================================
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    IST3102 EKONOMETRİ PROJESİ - ÖZET TABLO                 ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║ Bağımlı Değişken   : TÜFE (Tüketici Fiyat Endeksi)                        ║
+║ Bağımsız Değişkenler: USD, Sanayi Üretim End., M3, Tüketici Güven End.    ║
+║ Dönem              : 2015:04 - 2023:07 (100 gözlem)                       ║
+║ Ana Model          : Lin-Lin (Y = β₀ + β₁X₁ + β₂X₂ + β₃X₃ + β₄X₄ + ε)   ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║ R²                 : 0.873893                                        ║
+║ Düzeltilmiş R²     : 0.868583                                        ║
+║ F-istatistiği      : 164.5817                                         ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+
+  --- Test Sonuçları Özet Tablosu ---
+
+Test                                Sonuç                                   
+---------------------------------------------------------------------------
+F Testi (Genel Anlamlılık)          Model ANLAMLI                           
+t Testi - USD Dolar                 ANLAMLI (p=0.0000)                      
+t Testi - Sanayi Üretim End.        ANLAMSIZ (p=0.7522)                     
+t Testi - M3 Para Piy.              ANLAMLI (p=0.0000)                      
+t Testi - Tüketici Güven End.       ANLAMSIZ (p=0.2653)                     
+MWD Testi                           Doğrusal model REDDEDİLDİ / Logaritmik model REDDEDİLDİ
+Çoklu Doğrusal Bağlantı (VIF)       Max VIF=108.21 ⚠ SORUN                  
+ADF (Birim Kök) Testi               DURAĞAN DEĞİL: TÜFE, USD Dolar...       
+Wald Testi (Parasal Değ.)           ANLAMLI                                 
+Wald Testi (Reel Ekonomi Değ.)      ANLAMSIZ                                
+Chow Testi (2018 Kriz)              YAPISAL KIRILMA VAR                     
+Chow Testi (COVID-19)               YAPISAL KIRILMA VAR                     
+Park Testi                          DEĞİŞEN VARYANS                         
+Goldfeld-Quandt Testi               DEĞİŞEN VARYANS                         
+White Testi                         DEĞİŞEN VARYANS                         
+Durbin-Watson Testi                 POZİTİF OTOKORELASYON VARDIR            
